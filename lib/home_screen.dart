@@ -12,74 +12,68 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return Scaffold(
-          backgroundColor: Theme
-              .of(context)
-              .primaryColor,
+          backgroundColor: Theme.of(context).primaryColor,
           body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16, horizontal: 8),
-                child: Column(
-                  children: [
-                    SwitchListTile.adaptive(
-                        value: cubit.isSwitched,
-                        title: Text(
-                          'Turn on/off tow player',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        onChanged: (newValue) {
-                          cubit.selectNumberOfPlayer(newValue);
-                        }),
-                    Text(
-                      'it\'s ${cubit.activePlayer} turn'.toUpperCase(),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            child: Column(
+              children: [
+                SwitchListTile.adaptive(
+                    value: cubit.isSwitched,
+                    title: Text(
+                      'Turn on/off tow player',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 42,
+                        fontSize: 30,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                        child: GridView.count(
-                          padding: EdgeInsets.all(8),
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 5.0,
-                          crossAxisSpacing: 5.0,
-                          childAspectRatio: 1.0,
-                          children: List.generate(
-                              9,
-                                  (index) =>
-                                  buildGridViewItem(
-                                    context,
-                                    cubit.activePlayer,
-                                    index,
-                                  )
-                          ),
-                        )),
-                    Text(
-                      'result',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 35,
-                      ),
-                    ),
-                    repeatButton(context),
-                  ],
+                    onChanged: (newValue) {
+                      cubit.selectNumberOfPlayer(newValue);
+                    }),
+                Text(
+                  'it\'s ${cubit.activePlayer} turn'.toUpperCase(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 42,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              )),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                    child: GridView.count(
+                  padding: EdgeInsets.all(8),
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 5.0,
+                  childAspectRatio: 1.0,
+                  children: List.generate(
+                      9,
+                      (index) => buildGridViewItem(
+                            context,
+                            cubit.activePlayer,
+                            index,
+                          )),
+                )),
+                Text(
+                  'result',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 35,
+                  ),
+                ),
+                repeatButton(context),
+              ],
+            ),
+          )),
         );
       },
     );
   }
 
-  Widget repeatButton(context) =>
-      ElevatedButton.icon(
+  Widget repeatButton(context) => ElevatedButton.icon(
         onPressed: () {
           AppCubit.get(context).onRepeatButton();
         },
@@ -94,7 +88,11 @@ class HomeScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildGridViewItem(context, String activePlayer, int index,) =>
+  Widget buildGridViewItem(
+    context,
+    String activePlayer,
+    int index,
+  ) =>
       GestureDetector(
         onTap: () {
           AppCubit.get(context).onTabGridView(index);
@@ -103,18 +101,19 @@ class HomeScreen extends StatelessWidget {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: Theme
-                .of(context)
-                .shadowColor,
+            color: Theme.of(context).shadowColor,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
             child: Text(
-              Player.player_x.contains(index) ? 'x' : Player.player_o.contains(
-                  index) ? 'o' : '',
+              Player.player_x.contains(index)
+                  ? 'x'
+                  : Player.player_o.contains(index)
+                      ? 'o'
+                      : '',
               style: TextStyle(
-                color: Player.player_x.contains(index) ? Colors.blue : Colors
-                    .pink,
+                color:
+                    Player.player_x.contains(index) ? Colors.blue : Colors.pink,
                 fontSize: 50,
               ),
             ),

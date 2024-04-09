@@ -8,3 +8,7 @@ class AppOnTabGridViewState extends AppStates{}
 
 class AppOnRepeatButtonState extends AppStates{}
 
+class AppAutoPlayState extends AppStates{}
+
+
+

@@ -10,12 +10,16 @@ class Player{
 
 class Game{
 
-  static void playGame(int index , String activePlayer){
-    if(activePlayer == 'x'){
-      Player.player_x.add(index);
-    }else{
-      Player.player_o.add(index);
-    }
+   void playGame(int index , String activePlayer){
+
+     if ((Player.player_x.isEmpty || !Player.player_x.contains(index)) &&
+         (Player.player_o.isEmpty || !Player.player_o.contains(index))) {
+       if (activePlayer == 'x') {
+         Player.player_x.add(index);
+       } else {
+         Player.player_o.add(index);
+       }
+     }
     }
 
 }
